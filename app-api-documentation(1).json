@@ -1,0 +1,2504 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "App api documentation",
+    "description": "",
+    "license": {
+      "name": ""
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/app": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Health check",
+        "operationId": "health_checker_handler",
+        "responses": {
+          "200": {
+            "description": "HealthCheck"
+          }
+        }
+      }
+    },
+    "/app/account": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get Profile",
+        "operationId": "get_profile",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfile"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Update Profile",
+        "operationId": "update_profile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfileWithMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/account/email": {
+      "put": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Change Email",
+        "operationId": "change_account_email",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeAccountEmailInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserProfileWithMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/account/login-sessions": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get Login Sessions",
+        "operationId": "get_login_sessions",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginSessionsWithCurrentSession"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Revoke Login Sessions",
+        "operationId": "revoke_login_sessions",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/account/login-sessions/{id}": {
+      "delete": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Revoke Login Session",
+        "operationId": "revoke_login_session",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Session Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/account/password": {
+      "put": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Change Password",
+        "operationId": "change_password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/account/two-fa": {
+      "put": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Set 2FA",
+        "operationId": "set_two_fa",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/api-keys": {
+      "get": {
+        "tags": [
+          "Api Key"
+        ],
+        "summary": "Get Api Keys",
+        "operationId": "get_api_keys",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiKey"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Api Key"
+        ],
+        "summary": "Create Api Key",
+        "operationId": "create_api_key",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateApiKeyInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiKeyWithMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/api-keys/{id}": {
+      "get": {
+        "tags": [
+          "Api Key"
+        ],
+        "summary": "Get Api Key",
+        "operationId": "get_api_key",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Api Key Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiKey"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Api Key"
+        ],
+        "summary": "Revoke Api Key",
+        "operationId": "revoke_api_key",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Api Key Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/auth/forgot-password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Forgot Password",
+        "operationId": "forgot_password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthForgotPasswordInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/auth/forgot-password-verify": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Forgot Password Verify",
+        "operationId": "forgot_password_verify",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthForgotPasswordVerifyInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/auth/google": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Continue with google",
+        "description": "Api to login or register with google",
+        "operationId": "continue_with_google",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContinueWithGoogleInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthLoginInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/auth/login-verify": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login Verify",
+        "operationId": "login_verify",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthLoginVerifyInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/auth/logout": {
+      "delete": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthRegisterInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/auth/register-verify": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register Verify",
+        "operationId": "register_verify",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthRegisterVerifyInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/auth/reset-password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Reset Password",
+        "operationId": "reset_password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthResetPasswordInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/invoices": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Get Invoices",
+        "operationId": "get_invoices",
+        "responses": {
+          "200": {
+            "description": "Invoices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Invoice"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/invoices/{id}": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Get Invoice",
+        "operationId": "get_invoice",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Session Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvoiceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/payment-links": {
+      "get": {
+        "tags": [
+          "Payment Link"
+        ],
+        "summary": "Get Invoices",
+        "operationId": "get_payment_link_invoices",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Invoice"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Payment Link"
+        ],
+        "summary": "Create Invoice",
+        "operationId": "create_payment_link_invoice",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvoiceInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Invoice Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateInvoiceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/payout-wallets": {
+      "get": {
+        "tags": [
+          "Payout Wallet"
+        ],
+        "summary": "Get Payout Wallets",
+        "operationId": "get_payout_wallets",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PayoutWallet"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Payout Wallet"
+        ],
+        "summary": "Create Payout Wallet",
+        "operationId": "create_payout_wallet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePayoutWalletInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutWalletWithMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/payout-wallets/{id}": {
+      "get": {
+        "tags": [
+          "Payout Wallet"
+        ],
+        "summary": "Get Payout Wallet",
+        "operationId": "get_payout_wallet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Payout Wallet Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutWallet"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Payout Wallet"
+        ],
+        "summary": "Update Payout Wallet",
+        "operationId": "update_payout_wallet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Payout Wallet Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePayoutWalletInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutWalletWithMessage"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Payout Wallet"
+        ],
+        "summary": "Delete Payout Wallet",
+        "operationId": "delete_payout_wallet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Payout Wallet Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/payout-wallets/{id}/set-default": {
+      "put": {
+        "tags": [
+          "Payout Wallet"
+        ],
+        "summary": "Set Default Payout Wallet",
+        "operationId": "set_default_payout_wallet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Payout Wallet Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutWalletWithMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/payouts": {
+      "get": {
+        "tags": [
+          "Payout"
+        ],
+        "summary": "Get Payouts",
+        "operationId": "get_payouts",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Payout"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/stores": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Get Stores",
+        "operationId": "get_stores",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Store"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Create Store",
+        "operationId": "create_store",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateStoreInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreWithMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/stores/reorder": {
+      "patch": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Update Store Reorder",
+        "operationId": "update_store_reorder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Store"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/app/stores/{id}": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Get Store",
+        "operationId": "get_store",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Store"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Update Store",
+        "operationId": "update_store",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStoreInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreWithMessage"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Delete Store",
+        "operationId": "delete_store",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/stores/{id}/payment-settings": {
+      "put": {
+        "tags": [
+          "Store"
+        ],
+        "summary": "Update Payment Setting",
+        "operationId": "update_store_payment_setting",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStorePaymentSettingInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreWithMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/webhooks": {
+      "get": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Get Webhooks",
+        "operationId": "get_webhooks",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Webhook"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Create Webhook",
+        "operationId": "create_webhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWebhookInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookWithMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/webhooks/{id}": {
+      "get": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Get Webhook",
+        "operationId": "get_webhook",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Webhook Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Webhook"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Update Webhook",
+        "operationId": "update_webhook",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWebhookInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookWithMessage"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Delete Webhook",
+        "operationId": "delete_webhook",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Webhook Id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 24,
+              "minLength": 24
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app/webhooks/{id}/status": {
+      "put": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Update Webhook Status",
+        "operationId": "update_webhook_status",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWebhookStatusInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookWithMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiKey": {
+        "type": "object",
+        "required": [
+          "id",
+          "storeId",
+          "label",
+          "secretKey",
+          "createdAt"
+        ],
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "secretKey": {
+            "type": "string"
+          },
+          "storeId": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiKeyWithMessage": {
+        "type": "object",
+        "required": [
+          "message",
+          "apiKey"
+        ],
+        "properties": {
+          "apiKey": {
+            "$ref": "#/components/schemas/ApiKey"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthForgotPasswordInput": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email address of the user.",
+            "example": "princeraj9137@gmail.com"
+          }
+        }
+      },
+      "AuthForgotPasswordVerifyInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AuthForgotPasswordInput"
+          },
+          {
+            "type": "object",
+            "required": [
+              "code"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Verification code (OTP).",
+                "example": "123456"
+              }
+            }
+          }
+        ]
+      },
+      "AuthLoginInput": {
+        "type": "object",
+        "description": "Credentials of the user.",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email address of the user.",
+            "example": "princeraj9137@gmail.com"
+          },
+          "isRoot": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of the user.",
+            "example": "admin790"
+          }
+        }
+      },
+      "AuthLoginVerifyInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AuthLoginInput"
+          },
+          {
+            "type": "object",
+            "required": [
+              "code"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Verification code (OTP).",
+                "example": "123456"
+              }
+            }
+          }
+        ],
+        "description": "Credentials of the user."
+      },
+      "AuthRegisterInput": {
+        "type": "object",
+        "required": [
+          "email",
+          "password",
+          "confirmPassword"
+        ],
+        "properties": {
+          "confirmPassword": {
+            "type": "string",
+            "description": "Password Confirmation.",
+            "example": "admin790"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email address of the user.",
+            "example": "princeraj9137@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of the user.\nMin. 8 characters.",
+            "example": "admin790"
+          }
+        }
+      },
+      "AuthRegisterVerifyInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AuthRegisterInput",
+            "description": "The original Register struct fields."
+          },
+          {
+            "type": "object",
+            "required": [
+              "code"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Verification code (OTP).",
+                "example": "123456"
+              }
+            }
+          }
+        ]
+      },
+      "AuthResetPasswordInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AuthForgotPasswordVerifyInput"
+          },
+          {
+            "type": "object",
+            "required": [
+              "password",
+              "confirmPassword"
+            ],
+            "properties": {
+              "confirmPassword": {
+                "type": "string",
+                "description": "Password Confirmation.",
+                "example": "admin790"
+              },
+              "password": {
+                "type": "string",
+                "description": "New Password to set.",
+                "example": "admin790"
+              }
+            }
+          }
+        ]
+      },
+      "ChangeAccountEmailInput": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email address of the user.",
+            "example": "princeraj9137@gmail.com"
+          }
+        }
+      },
+      "ChangePasswordInput": {
+        "type": "object",
+        "required": [
+          "newPassword",
+          "confirmPassword"
+        ],
+        "properties": {
+          "confirmPassword": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "ContinueWithGoogleInput": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/GoogleLoginWithCredential"
+          },
+          {
+            "$ref": "#/components/schemas/GoogleLoginWithCode"
+          }
+        ]
+      },
+      "CreateApiKeyInput": {
+        "type": "object",
+        "required": [
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateInvoiceInput": {
+        "type": "object",
+        "required": [
+          "amount"
+        ],
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Order Id"
+          }
+        }
+      },
+      "CreateInvoiceResponse": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponseMessage"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "CreatePayoutWalletInput": {
+        "type": "object",
+        "required": [
+          "label",
+          "address",
+          "isMainWallet"
+        ],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "isMainWallet": {
+            "type": "boolean"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateStoreInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "defaultCurrency"
+        ],
+        "properties": {
+          "defaultCurrency": {
+            "$ref": "#/components/schemas/StorePaymentCurrency"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "logo": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateWebhookInput": {
+        "type": "object",
+        "required": [
+          "label",
+          "isEnabled",
+          "url"
+        ],
+        "properties": {
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "label": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "GoogleLoginWithCode": {
+        "type": "object",
+        "required": [
+          "authorizationCode"
+        ],
+        "properties": {
+          "authorizationCode": {
+            "type": "string"
+          },
+          "isRoot": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      "GoogleLoginWithCredential": {
+        "type": "object",
+        "required": [
+          "credential"
+        ],
+        "properties": {
+          "credential": {
+            "type": "string"
+          },
+          "isRoot": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      "Invoice": {
+        "type": "object",
+        "required": [
+          "id",
+          "storeId",
+          "privateKey",
+          "address",
+          "inputAmount",
+          "payableAmount",
+          "status",
+          "category",
+          "inputCurrency",
+          "cryptoCurrency",
+          "validTill",
+          "createdAt",
+          "updatedAt",
+          "exchangeRate"
+        ],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "category": {
+            "$ref": "#/components/schemas/InvoiceCategory"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cryptoCurrency": {
+            "$ref": "#/components/schemas/InvoiceCryptoCurrency"
+          },
+          "exchangeRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "id": {
+            "type": "string"
+          },
+          "inputAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "inputCurrency": {
+            "$ref": "#/components/schemas/InvoiceInputCurrency"
+          },
+          "orderId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "outcomeAmount": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "paidAmount": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "payableAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "privateKey": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/InvoiceStatus"
+          },
+          "storeId": {
+            "type": "string"
+          },
+          "transactions": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Value"
+              }
+            ]
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validTill": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "InvoiceCategory": {
+        "type": "string",
+        "enum": [
+          "Contribution",
+          "Crowdfund",
+          "Donation",
+          "PaymentLink",
+          "Subscription",
+          "WebApp"
+        ]
+      },
+      "InvoiceCryptoCurrency": {
+        "type": "string",
+        "enum": [
+          "Trx"
+        ]
+      },
+      "InvoiceInputCurrency": {
+        "type": "string",
+        "enum": [
+          "Eur",
+          "Trx",
+          "Usd"
+        ]
+      },
+      "InvoiceResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "address",
+          "inputAmount",
+          "paidAmount",
+          "payableAmount",
+          "createdAt",
+          "updatedAt",
+          "transactions",
+          "status",
+          "inputCurrency",
+          "cryptoCurrency",
+          "exchangeRate"
+        ],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cryptoCurrency": {
+            "$ref": "#/components/schemas/InvoiceCryptoCurrency"
+          },
+          "exchangeRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "id": {
+            "type": "string"
+          },
+          "inputAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "inputCurrency": {
+            "$ref": "#/components/schemas/InvoiceInputCurrency"
+          },
+          "orderId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "outcomeAmount": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "paidAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "payableAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "status": {
+            "$ref": "#/components/schemas/InvoiceStatus"
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransactionBlock"
+            }
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "InvoiceStatus": {
+        "type": "string",
+        "enum": [
+          "Expired",
+          "Pending",
+          "Processing",
+          "Settled"
+        ]
+      },
+      "LoginMethod": {
+        "type": "string",
+        "enum": [
+          "Email",
+          "Google"
+        ]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "required": [
+          "verify",
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "verify": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LoginSession": {
+        "type": "object",
+        "required": [
+          "id",
+          "userId",
+          "token",
+          "isActive",
+          "role",
+          "isLoginAsClient",
+          "loginMethod",
+          "createdAt",
+          "validTill"
+        ],
+        "properties": {
+          "browser": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "city": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "ip": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isLoginAsClient": {
+            "type": "boolean"
+          },
+          "loginMethod": {
+            "$ref": "#/components/schemas/LoginMethod"
+          },
+          "os": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "region": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "role": {
+            "$ref": "#/components/schemas/UserRole"
+          },
+          "token": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "validTill": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "LoginSessionsWithCurrentSession": {
+        "type": "object",
+        "required": [
+          "sessions",
+          "currentSessionId"
+        ],
+        "properties": {
+          "currentSessionId": {
+            "type": "string"
+          },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LoginSession"
+            }
+          }
+        }
+      },
+      "Payout": {
+        "type": "object",
+        "required": [
+          "id",
+          "storeId",
+          "amount",
+          "payoutType",
+          "currency",
+          "status",
+          "address",
+          "createdAt",
+          "updatedAt",
+          "invoiceId"
+        ],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/InvoiceCryptoCurrency"
+          },
+          "id": {
+            "type": "string"
+          },
+          "invoiceId": {
+            "type": "string"
+          },
+          "payoutType": {
+            "$ref": "#/components/schemas/PayoutType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PayoutStatus"
+          },
+          "storeId": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PayoutStatus": {
+        "type": "string",
+        "enum": [
+          "Failed",
+          "Pending",
+          "Settled"
+        ]
+      },
+      "PayoutType": {
+        "type": "string",
+        "enum": [
+          "Instant",
+          "Manual"
+        ]
+      },
+      "PayoutWallet": {
+        "type": "object",
+        "required": [
+          "id",
+          "storeId",
+          "label",
+          "address",
+          "isVerified",
+          "isMainWallet",
+          "createdAt"
+        ],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isMainWallet": {
+            "type": "boolean"
+          },
+          "isVerified": {
+            "type": "boolean"
+          },
+          "label": {
+            "type": "string"
+          },
+          "storeId": {
+            "type": "string"
+          }
+        }
+      },
+      "PayoutWalletWithMessage": {
+        "type": "object",
+        "required": [
+          "message",
+          "payoutWallet"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "payoutWallet": {
+            "$ref": "#/components/schemas/PayoutWallet"
+          }
+        }
+      },
+      "ResponseMessage": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Store": {
+        "type": "object",
+        "required": [
+          "id",
+          "userId",
+          "name",
+          "defaultCurrency",
+          "createdAt",
+          "index"
+        ],
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "defaultCurrency": {
+            "$ref": "#/components/schemas/StorePaymentCurrency"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "logo": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "StorePaymentCurrency": {
+        "type": "string",
+        "enum": [
+          "Trx",
+          "Usd",
+          "Usdt"
+        ]
+      },
+      "StoreWithMessage": {
+        "type": "object",
+        "required": [
+          "store",
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "store": {
+            "$ref": "#/components/schemas/Store"
+          }
+        }
+      },
+      "TransactionBlock": {
+        "type": "object",
+        "required": [
+          "blockNumber",
+          "confirmations",
+          "amount",
+          "isConfirmed",
+          "fromAddress",
+          "toAddress",
+          "timestamp",
+          "txId"
+        ],
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "blockNumber": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "confirmations": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "fromAddress": {
+            "type": "string"
+          },
+          "isConfirmed": {
+            "type": "boolean"
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "toAddress": {
+            "type": "string"
+          },
+          "txId": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdatePayoutWalletInput": {
+        "type": "object",
+        "required": [
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateProfileInput": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fullName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "UpdateStoreInput": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "logo": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateStorePaymentSettingInput": {
+        "type": "object",
+        "required": [
+          "defaultCurrency"
+        ],
+        "properties": {
+          "defaultCurrency": {
+            "$ref": "#/components/schemas/StorePaymentCurrency"
+          }
+        }
+      },
+      "UpdateWebhookStatusInput": {
+        "type": "object",
+        "required": [
+          "isEnabled"
+        ],
+        "properties": {
+          "isEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UserProfile": {
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "fullName",
+          "role"
+        ],
+        "properties": {
+          "avatar": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "email": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/UserRole"
+          }
+        }
+      },
+      "UserProfileWithMessage": {
+        "type": "object",
+        "required": [
+          "message",
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UserProfile"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "UserRole": {
+        "type": "string",
+        "enum": [
+          "Admin",
+          "User"
+        ]
+      },
+      "Value": {},
+      "Webhook": {
+        "type": "object",
+        "required": [
+          "id",
+          "storeId",
+          "label",
+          "url",
+          "secretKey",
+          "isEnabled",
+          "createdAt"
+        ],
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "label": {
+            "type": "string"
+          },
+          "secretKey": {
+            "type": "string"
+          },
+          "storeId": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "WebhookWithMessage": {
+        "type": "object",
+        "required": [
+          "message",
+          "webhook"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "webhook": {
+            "$ref": "#/components/schemas/Webhook"
+          }
+        }
+      }
+    }
+  }
+}
